@@ -1,18 +1,18 @@
 package org.com.serratec.concessionaria.exception;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
 public class ErrorResponse {
     private int status;
-    private String message;
+    private String mensagem;
     private LocalDateTime timestamp;
 
-    public ErrorResponse(int status, String message) {
+    public ErrorResponse(int status, String mensagem) {
         this.status = status;
-        this.message = message;
+        this.mensagem = mensagem;
         this.timestamp = LocalDateTime.now();
     }
 }

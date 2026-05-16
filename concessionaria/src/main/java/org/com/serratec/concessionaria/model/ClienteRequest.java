@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -20,6 +21,7 @@ public class ClienteRequest {
     private String telefone;
 
     @NotBlank(message = "CPF é obrigatório")
+    @Length(min = 11, max = 11)
     private String cpf;
 
     @NotBlank(message = "Email é obrigatório")
