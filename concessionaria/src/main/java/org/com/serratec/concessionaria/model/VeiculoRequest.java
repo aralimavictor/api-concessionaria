@@ -38,6 +38,10 @@ public class VeiculoRequest {
     @NotBlank(message = "Placa é obrigatória")
     private String placa;
 
+    public void setPlaca(String placa) {
+        this.placa = placa != null ? placa.toUpperCase() : null;
+    }
+
     @DecimalMin(value = "0.0", message = "Desconto minimo de 0")
     @NotNull(message = "Desconto máximo é obrigatório")
     private BigDecimal maximoDesconto;

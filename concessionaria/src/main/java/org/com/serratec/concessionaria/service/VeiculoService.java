@@ -28,8 +28,10 @@ public class VeiculoService {
     private ClienteRepository clienteRepository;
 
     public VeiculoResponse cadastrar(VeiculoRequest request) {
-        if (veiculoRepository.existsByPlaca(request.getPlaca())) {
-            throw new ConflictException("Placa já cadastrada: " + request.getPlaca());
+        String placaFormatada = request.getPlaca();
+
+        if (veiculoRepository.existsByPlacaIgnoreCase(placaFormatada)) {
+            throw new ConflictException("Placa já cadastrada: " + placaFormatada);
         }
 
         if (Boolean.TRUE.equals(request.getVendido()) && request.getValorVenda() == null) {
@@ -62,13 +64,13 @@ public class VeiculoService {
 
     public List<VeiculoResponse> buscar(String placa, String marca, String modelo) {
         if (placa != null) {
-            Veiculo veiculo = veiculoRepository.findByPlaca(placa)
+            Veiculo veiculo = veiculoRepository.findByPlacaIgnoreCase(placa)
                     .orElseThrow(() -> new ResourceNotFoundException("Veículo não encontrado com placa: " + placa));
             return List.of(toResponse(veiculo));
         }
 
         if (marca != null) {
-            List<Veiculo> veiculos = veiculoRepository.findByMarca(marca);
+            List<Veiculo> veiculos = veiculoRepository.findByMarcaIgnoreCaseAndAccent(marca);
             if (veiculos.isEmpty()) {
                 throw new ResourceNotFoundException("Nenhum veículo encontrado com marca: " + marca);
             }
@@ -76,7 +78,7 @@ public class VeiculoService {
         }
 
         if (modelo != null) {
-            List<Veiculo> veiculos = veiculoRepository.findByModelo(modelo);
+            List<Veiculo> veiculos = veiculoRepository.findByModeloIgnoreCaseAndAccent(modelo);
             if (veiculos.isEmpty()) {
                 throw new ResourceNotFoundException("Nenhum veículo encontrado com modelo: " + modelo);
             }
@@ -124,7 +126,7 @@ public class VeiculoService {
                 veiculo.getModelo(),
                 veiculo.getAno(),
                 veiculo.getValor(),
-                veiculo.getPlaca(),
+                veiculo.getPlaca().toUpperCase(),
                 veiculo.getMaximoDesconto(),
                 veiculo.getVendido(),
                 veiculo.getValorVenda()
