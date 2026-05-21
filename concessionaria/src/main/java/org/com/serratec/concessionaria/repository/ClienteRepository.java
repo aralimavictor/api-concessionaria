@@ -27,7 +27,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 // Requer a extensão unaccent instalada no PostgreSQL:
 // CREATE EXTENSION IF NOT EXISTS unaccent;
 // SELECT unaccent('João');  -> deve retornar 'joao'.
-    
+
     @Query(value = "SELECT * FROM clientes WHERE unaccent(lower(nome)) LIKE unaccent(lower(concat('%', :nome, '%')))", nativeQuery = true)
     List<Cliente> findByNomeIgnoreCaseAndAccent(@Param("nome") String nome);
 }
