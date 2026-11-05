@@ -1,7 +1,6 @@
 # 🚗 API Concessionária
 
 API REST desenvolvida em Java com Spring Boot para gerenciamento de clientes e veículos de uma concessionária.
-Projeto individual desenvolvido como atividade prática do curso de API do SERRATEC.
 
 ---
 
