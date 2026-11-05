@@ -4,11 +4,6 @@ API REST desenvolvida em Java com Spring Boot para gerenciamento de clientes e v
 
 ---
 
-## 👨‍💻 Autor
-
-**Victor Lima**
----
-
 ## 🛠️ Tecnologias
 
 - Java 17+
